@@ -1,0 +1,19 @@
+.clients_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row; /* Изменено на горизонтальное направление */
+  }
+  
+  .client_card {
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .client_card p {
+    margin: 5px 0;
+  }

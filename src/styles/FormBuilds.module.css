@@ -1,0 +1,84 @@
+/* FormBuildsComponent.module.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form_container {
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form_label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .form_input,
+  .form_select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form_file_input {
+    margin-top: 8px;
+  }
+  
+  .form_submit_btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: inline-block; /* Добавляем для того, чтобы кнопка была в одной строке с другими элементами */
+  }
+  
+  .form_submit_btn:hover {
+    background-color: #45a049;
+  }
+  
+  .link {
+    display: block;
+    margin-top: 16px;
+    color: #4caf50;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+
+  .header {
+    height: 9vh;
+    background: #2B2B2B; 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between; /* Распределение элементов по всей ширине контейнера */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    padding: 10px; 
+}
+
+.logo_header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  

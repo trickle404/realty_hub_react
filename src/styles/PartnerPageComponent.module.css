@@ -1,0 +1,66 @@
+/* PartnerPageStyles.css */
+
+
+.partner {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .partner p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  .hello_partner {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333; /* Цвет текста */
+  }
+  
+  .link_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .partner_link {
+    flex: 1;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  .partner_link:last-child {
+    margin-right: 0;
+  }
+  
+  .partner_link:hover {
+    background-color: #45a049;
+  }
+  
+  .header {
+    height: 9vh;
+    background: #2B2B2B; 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between; /* Распределение элементов по всей ширине контейнера */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    padding: 10px; 
+}
+
+.logo_header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
