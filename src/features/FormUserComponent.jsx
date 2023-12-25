@@ -64,7 +64,7 @@ const FormUserComponent = () => {
         </div>
         <div className={styles.add_user}>
                 <div>
-                <a href="/partner_page">partner page</a>
+                <Link to ="/partner_page">partner page</Link>
                 <h3>Новый пользователь</h3>
                 <form onSubmit={(e) => createUser(e)}>
                     <label>Имя сотрудника</label>

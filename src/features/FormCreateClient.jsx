@@ -75,7 +75,7 @@ const FormCreateClient = () => {
             </div>
             <div className={styles.add_client}>
             <div>
-                <a href="/partner_page">partner page</a>
+                <Link to ="/partner_page">partner page</Link>
                 <h3>Новый клиент</h3>
                 <form onSubmit={(e) => createClient(e)}>
                 <label>Имя</label>

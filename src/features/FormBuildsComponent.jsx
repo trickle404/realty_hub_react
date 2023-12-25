@@ -91,7 +91,6 @@ const FormBuildsComponent = () => {
             });
         }
     }
-    
 
     const CreateBuilds = (e) => {
         e.preventDefault();
@@ -153,7 +152,7 @@ const FormBuildsComponent = () => {
                 </div>
             </div>
             <div className={styles.from_container}>
-                <Link to = "/" className={styles.link}>Home Page</Link>
+                <Link to ="/partner_page" className={styles.link}>partner page</Link>
                 <form onSubmit={(e) => CreateBuilds(e)}>
                     <label className={styles.form_label}>
                         Тип постройки

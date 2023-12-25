@@ -58,6 +58,7 @@ const BuildsList = () => {
                 <div className={styles.logo_header}>
                     <Link to="/"><img src={logo_realty_hub} alt="" /></Link>
                 </div>
+                <Link to ="/partner_page" className={styles.link}>partner page</Link>
             </div>
             <div className={styles.data_builds_container}>
             {data.map(item => (

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import axios from 'axios';
 import styles from '../../styles/ClientList.module.css';
 
-const ClientsList = ({username}) => {
+const ClientsList = ({clientList}) => {
     const API_URL = "http://localhost:8090/private";
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
