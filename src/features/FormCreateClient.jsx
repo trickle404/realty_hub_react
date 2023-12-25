@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Cookies from "js-cookie";
@@ -21,6 +21,29 @@ const FormCreateClient = () => {
         manager : ""
     })
 
+    const [managers, setManagers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = Cookies.get('token');
+                const usersResponse = await axios.get(`${API_URL}/get_all_users`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const usersData = usersResponse.data;
+                setManagers(usersData);
+    
+                setLoading(false);
+            } catch (error) {
+
+            }
+        }
+        fetchData();
+    }, [])
+
     
 
     const handleChange = e => {
@@ -29,6 +52,7 @@ const FormCreateClient = () => {
     }
 
     const save = (client) => {
+        console.log(Client);
         const token = Cookies.get('token');
         return axios.post(API_URL+"/add_new_client", client, {
             headers : {
@@ -99,7 +123,14 @@ const FormCreateClient = () => {
                 <label>Описание</label>
                 <input type="text" name="description" value={Client.description} onChange={handleChange} />
                 <label>Менеджер</label>
-                <input type="text" name="manager" value={Client.manager} onChange={handleChange} />
+                <select name="manager" value={Client.manager} onChange={handleChange} className={styles.form_select}>
+                <option value="">Select from the list</option>
+                    {managers.map(manager => (
+                        <option key={manager.id} value={manager.id}>
+                            {manager.name}
+                        </option>
+                    ))}
+                </select>
                 <input type="submit" value="Create" />
                 </form>
             </div>

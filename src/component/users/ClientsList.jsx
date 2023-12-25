@@ -19,6 +19,8 @@ const ClientsList = ({clientList}) => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                console.log(response.data);
+                console.log(response.data);
                 setData(response.data);
                 setDataResponse(true);
             } catch (error) {
@@ -51,7 +53,7 @@ const ClientsList = ({clientList}) => {
                         <p>Телефон : {client.numberPhone}</p>                    
                         <p>Бюджет : {client.income} EUR</p>                        
                         <p>Тип сделки : {client.type}</p>
-                        <p>Работает с менеджером : {client.manager}</p>
+                        <p>Работает с менеджером : {client.managerName}</p>
                     </div>
                 ))}
             </div>
