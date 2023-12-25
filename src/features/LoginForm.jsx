@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import style from '../styles/LoginForm.module.css';
@@ -7,6 +7,19 @@ import Cookies from 'js-cookie';
 
 const LoginComponent = () => {
     const navigate = useNavigate();
+
+    const checkToken = useCallback(() => {
+      const token = Cookies.get('token');
+      if (token) {
+          // Если токен существует, перенаправляем на защищенную страницу
+          navigate('/partner_page');
+      }
+  }, [navigate]);
+
+  useEffect(() => {
+      // Проверяем токен при загрузке компонента
+      checkToken();
+  }, [checkToken]); // Добавляем checkToken в массив зависимостей
   
     const [formData, setFormData] = useState({
       username: '',

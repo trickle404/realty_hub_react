@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import axios from 'axios';
 import styles from '../../styles/ClientList.module.css';
 
-const ClientsList = ({username}) => {
+const ClientsList = ({clientList}) => {
     const API_URL = "http://localhost:8090/private";
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,6 +19,8 @@ const ClientsList = ({username}) => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                console.log(response.data);
+                console.log(response.data);
                 setData(response.data);
                 setDataResponse(true);
             } catch (error) {
@@ -51,7 +53,7 @@ const ClientsList = ({username}) => {
                         <p>Телефон : {client.numberPhone}</p>                    
                         <p>Бюджет : {client.income} EUR</p>                        
                         <p>Тип сделки : {client.type}</p>
-                        <p>Работает с менеджером : {client.manager}</p>
+                        <p>Работает с менеджером : {client.managerName}</p>
                     </div>
                 ))}
             </div>

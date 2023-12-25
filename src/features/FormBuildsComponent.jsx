@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import styles from '../styles/FormBuilds.module.css';
 import logo_realty_hub from '../content/logo/Frame.png';
 
+
 const FormBuildsComponent = () => {
 
     const { id } = useParams();
@@ -34,36 +35,63 @@ const FormBuildsComponent = () => {
         image : []
     });
 
+    const [managers, setManagers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     useEffect(() => {
-        const token = Cookies.get('token');
-        if(id) {
-            axios.get(API_URL + '/get_build/'+ id, {
-                headers : {
-                    'Authorization': `Bearer ${token}` 
+        const fetchData = async () => {
+            try {
+                const token = Cookies.get('token');
+    
+                // Получить данные конкретного дома, если есть id
+                if (id) {
+                    const buildResponse = await axios.get(`${API_URL}/get_build/${id}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    const buildData = buildResponse.data;
+                    setBuilds({
+                        type : buildData.data.type || "",
+                        title : buildData.data.title || "",
+                        description : buildData.data.description || "",
+                        price : buildData.data.price || "",
+                        square_footage : buildData.data.square_footage || "",
+                        count_of_bedrooms : buildData.data.count_of_bedrooms || "",
+                        count_of_bathrooms : buildData.data.count_of_bathrooms || "",
+                        city : buildData.data.city || "",
+                        view : buildData.data.view || "",
+                        distance_to_beach : buildData.data.distance_to_beach || "",
+                        floor : buildData.data.floor || "",
+                        number_of_stores : buildData.data.number_of_stores || "",
+                        type_of_dev : buildData.data.type_of_dev || "",
+                        geo : buildData.data.geo || "",
+                        manager : buildData.data.manager || "",
+                        contact : buildData.data.contact || "",
+                        image : buildData.data.image || []
+                    });
                 }
-            }).then(response => {
-                setBuilds({
-                    type : response.data.type || "",
-                    title : response.data.title || "",
-                    description : response.data.description || "",
-                    price : response.data.price || "",
-                    square_footage : response.data.square_footage || "",
-                    count_of_bedrooms : response.data.count_of_bedrooms || "",
-                    count_of_bathrooms : response.data.count_of_bathrooms || "",
-                    city : response.data.city || "",
-                    view : response.data.view || "",
-                    distance_to_beach : response.data.distance_to_beach || "",
-                    floor : response.data.floor || "",
-                    number_of_stores : response.data.number_of_stores || "",
-                    type_of_dev : response.data.type_of_dev || "",
-                    geo : response.data.geo || "",
-                    manager : response.data.manager || "",
-                    contact : response.data.contact || "",
-                    image : response.data.image || []
+    
+                // Получить список всех пользователей
+                const usersResponse = await axios.get(`${API_URL}/get_all_users`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
-            });
-        }
-    }, [id])
+                const usersData = usersResponse.data;
+                setManagers(usersData);
+    
+                setLoading(false);
+            } catch (error) {
+                setError(error.message || "Something went wrong?");
+                setLoading(false);
+            }
+        };
+    
+        fetchData();
+    
+    }, [id]);
 
     const handleChange = e => {
         const {name , value} = e.target;
@@ -75,7 +103,7 @@ const FormBuildsComponent = () => {
         setBuilds({ ...Builds, image: [...Builds.image, ...image] });
     };
 
-    const save = (builds) => {
+    const save  = async (builds) => {
         const token = Cookies.get('token');
         if(id) {
             return axios.put(API_URL + "/edit_build/" + id, builds, {
@@ -84,6 +112,11 @@ const FormBuildsComponent = () => {
                 }
             });
         } else {
+
+            if (Builds.image.length === 0) {
+                const defaultImageBlob = await fetch(logo_realty_hub).then(r => r.blob());
+                builds.append('image', defaultImageBlob);
+            }
             return axios.post(API_URL + "/create_builds", builds, {
                 headers : {
                     'Authorization': `Bearer ${token}` 
@@ -91,7 +124,6 @@ const FormBuildsComponent = () => {
             });
         }
     }
-    
 
     const CreateBuilds = (e) => {
         e.preventDefault();
@@ -153,7 +185,7 @@ const FormBuildsComponent = () => {
                 </div>
             </div>
             <div className={styles.from_container}>
-                <Link to = "/" className={styles.link}>Home Page</Link>
+                <Link to ="/partner_page" className={styles.link}>partner page</Link>
                 <form onSubmit={(e) => CreateBuilds(e)}>
                     <label className={styles.form_label}>
                         Тип постройки
@@ -254,7 +286,14 @@ const FormBuildsComponent = () => {
                     <input type = "text" name="geo" value={Builds.geo} onChange={handleChange} className={styles.form_input}/>
                     <br/>
                     <label className={styles.form_label}>Менеджер</label>
-                    <input type = "text" name="manager" value={Builds.manager} onChange={handleChange} className={styles.form_input}/>
+                    <select name="manager" value={Builds.manager} onChange={handleChange} className={styles.form_select}>
+                    <option value="">Select from the list</option>
+                        {managers.map(manager => (
+                            <option key={manager.id} value={manager.id}>
+                                {manager.name}
+                            </option>
+                        ))}
+                     </select>
                     <br/>
                     <label className={styles.form_label}>Контакты</label>
                     <input type = "text" name="contact" value={Builds.contact} onChange={handleChange} className={styles.form_input}/>
