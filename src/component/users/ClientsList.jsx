@@ -19,9 +19,8 @@ const ClientsList = ({clientList}) => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log(response.data);
-                console.log(response.data);
                 setData(response.data);
+                console.log(response.data);
                 setDataResponse(true);
             } catch (error) {
                 setError(error.message || "OOOPS");

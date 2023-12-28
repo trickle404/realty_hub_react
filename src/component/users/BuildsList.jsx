@@ -20,6 +20,7 @@ const BuildsList = () => {
         try {
           const response = await axios.get('http://localhost:8090/public/home');
           setData(response.data);
+          console.log(response.data);
           setDataResponse(true);
         } catch (error) {
           console.error("Error getting data:", error);
@@ -65,6 +66,8 @@ const BuildsList = () => {
               <div key={item.id} className={styles.data_builds_block}>
                 <Link to={`/details/${item.id}`}>
                   {item.title}
+                  <br />
+                  manager : {item.manager}
                 </Link>
                 <div>
                     {item.imageList.map((image, index) => (

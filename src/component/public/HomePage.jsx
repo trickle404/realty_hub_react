@@ -18,6 +18,7 @@ const HomePage = () => {
         const response = await axios.get('http://localhost:8090/public/home');
         setData(response.data);
         setDataResponse(true);
+        console.log(response.data);
       } catch (error) {
         console.error("Error getting data:", error);
       }
