@@ -26,9 +26,28 @@ const PartnerPage = () => {
             try {
                 const storedUserData = localStorage.getItem('userData');
                 if (storedUserData) {
-                    dispatch(setUserData(JSON.parse(storedUserData)));
+                    const parsedUserData = JSON.parse(storedUserData);
+                    
+                    if (parsedUserData.clientsList) {
+                        parsedUserData.clientsList.forEach(client => {
+                            if (client.imageList) {
+                                client.imageList = [];
+                            }
+                        });
+                    }
+        
+                    if (parsedUserData.buildsList) {
+                        parsedUserData.buildsList.forEach(build => {
+                            if (build.imageList) {
+                                build.imageList = [];
+                            }
+                        });
+                    }
+        
+                    localStorage.setItem('userData', JSON.stringify(parsedUserData));
+                    dispatch(setUserData(parsedUserData));
                 }
-
+        
                 if (!storedUserData || userDataLocation.username) {
                     const token = Cookies.get('token');
                     const res = await axios.get(`${API_URL}/get_user/${userDataLocation.username}`, {
@@ -36,8 +55,25 @@ const PartnerPage = () => {
                             'Authorization': `Bearer ${token}`
                         }
                     });
-                    dispatch(setUserData(res.data));
+                    
+                    if (res.data.clientsList) {
+                        res.data.clientsList.forEach(client => {
+                            if (client.imageList) {
+                                client.imageList = [];
+                            }
+                        });
+                    }
+        
+                    if (res.data.buildsList) {
+                        res.data.buildsList.forEach(build => {
+                            if (build.imageList) {
+                                build.imageList = [];
+                            }
+                        });
+                    }
+        
                     localStorage.setItem('userData', JSON.stringify(res.data));
+                    dispatch(setUserData(res.data));
                 }
             } catch (error) {
                 setError(error.message || 'Что-то пошло не так');
@@ -45,7 +81,7 @@ const PartnerPage = () => {
                 setLoading(false);
             }
         };
-
+        
         const fetchBuildsByManager = async () => {
             try {
                 const token = Cookies.get('token');
@@ -86,11 +122,6 @@ const PartnerPage = () => {
 
     if (error) {
         return <div>Ошибка: {error}</div>;
-    }
-
-    if(true) {
-        console.log("clients ", clients);
-        console.log("builds ", builds);
     }
 
     return(
