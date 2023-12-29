@@ -1,9 +1,6 @@
 import styles from '../../styles/ClientList.module.css';
 
 const BuildsListSmall = ({buildsList}) => {
-    if(true) {
-        console.log(buildsList);
-    }
     return (
         <div>
             <div className={styles.clients_container}>

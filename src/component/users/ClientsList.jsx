@@ -1,7 +1,6 @@
 import styles from '../../styles/ClientList.module.css';
 
 const ClientsList = ({clientList}) => {
-    console.log(clientList);
     return(
         <div>
             <div className={styles.clients_container}>
