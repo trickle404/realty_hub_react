@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Cookies from "js-cookie";
-import logo_realty_hub from '../content/logo/Frame.png';
 import styles from '../styles/CreateClient.module.css';
+import HeaderComponent from '../component/users/HeaderComponent';
 
 const FormCreateClient = () => {
     const[msg, setMsg] = useState("");
@@ -92,11 +92,7 @@ const FormCreateClient = () => {
 
     return(
         <div>
-            <div className={styles.header}>
-                <div className={styles.logo_header}>
-                  <Link to="/"><img src={logo_realty_hub} alt="" /></Link>
-                </div>
-            </div>
+            <HeaderComponent/>
             <div className={styles.add_client}>
             <div>
                 <Link to ="/partner_page">partner page</Link>
