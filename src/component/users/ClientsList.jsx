@@ -1,51 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from "js-cookie";
-import axios from 'axios';
 import styles from '../../styles/ClientList.module.css';
 
 const ClientsList = ({clientList}) => {
-    const API_URL = "http://localhost:8090/private";
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [data, setData] = useState(null);
-    const [hasResponse, setDataResponse] = useState(false);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = Cookies.get("token");
-                const response = await axios.get(`${API_URL}/clients`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setData(response.data);
-                console.log(response.data);
-                setDataResponse(true);
-            } catch (error) {
-                setError(error.message || "OOOPS");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if(!hasResponse) {
-            fetchData();
-        }
-    }, [hasResponse, data]);
-
-    if (loading) {
-        return <div>Загрузка...</div>;
-    }
-
-    if (error) {
-        return <div>Ошибка: {error}</div>;
-    }
-
+    console.log(clientList);
     return(
         <div>
             <div className={styles.clients_container}>
-                {data.map(client => (
+                {clientList.map(client => (
                     <div key={client.id} className={styles.client_card}>
                         <p>Имя : {client.firstName}</p>                        
                         <p>Фамилия : {client.lastName}</p>                        

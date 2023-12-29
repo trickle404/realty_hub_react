@@ -12,8 +12,7 @@ import Image from '../Image';
 
             const fetchHouseData = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8090/public/details_lot/${id}`)
-                    console.log(response);
+                    const response = await axios.get(`http://localhost:8090/public/details_lot/${id}`);
                     setHouseData(response.data);
                 } catch (error) {
                     console.error(error);

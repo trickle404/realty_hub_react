@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from "js-cookie";
 import styles from '../styles/CreateUser.module.css'
 import { Link } from "react-router-dom";
-import logo_realty_hub from '../content/logo/Frame.png';
+import HeaderComponent from '../component/users/HeaderComponent';
 
 const FormUserComponent = () => {
 
@@ -57,11 +57,7 @@ const FormUserComponent = () => {
 
     return(
         <div>
-        <div className={styles.header}>
-                <div className={styles.logo_header}>
-                  <Link to="/"><img src={logo_realty_hub} alt="" /></Link>
-                </div>
-        </div>
+        <HeaderComponent/>
         <div className={styles.add_user}>
                 <div>
                 <Link to ="/partner_page">partner page</Link>
