@@ -17,7 +17,7 @@ const FormBuildsComponent = () => {
     const API_URL = "http://localhost:8090/private";
     
     const [Builds, setBuilds] = useState({
-        type : "",
+        houseType : "",
         title : "",
         description : "",
         price : "",
@@ -54,7 +54,7 @@ const FormBuildsComponent = () => {
                     });
                     const buildData = buildResponse.data;
                     setBuilds({
-                        type : buildData.data.type || "",
+                        houseType : buildData.data.houseType || "",
                         title : buildData.data.title || "",
                         description : buildData.data.description || "",
                         price : buildData.data.price || "",
@@ -130,7 +130,7 @@ const FormBuildsComponent = () => {
         e.preventDefault();
       
         const formData = new FormData();
-        formData.append("type", Builds.type);
+        formData.append("houseType", Builds.houseType);
         formData.append("title", Builds.title);
         formData.append("description", Builds.description);
         formData.append("price", Builds.price);
@@ -154,7 +154,7 @@ const FormBuildsComponent = () => {
           .then((res) => {
             setMsg("Build Added Successfully");
             setBuilds({
-              type: "",
+              houseType: "",
               title: "",
               description: "",
               price: "",
@@ -187,7 +187,7 @@ const FormBuildsComponent = () => {
                     <label className={styles.form_label}>
                         Тип постройки
                         <br/>
-                        <select name="type" value={Builds.type} onChange={handleChange} className={styles.form_select}>
+                        <select name="houseType" value={Builds.houseType} onChange={handleChange} className={styles.form_select}>
                             <option value="unknown">Выберите из списка</option>
                             <option value="Студии">Студии</option>
                             <option value="Квартиры">Квартиры</option>

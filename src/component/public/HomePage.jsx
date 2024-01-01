@@ -11,6 +11,9 @@ import logo_realty_hub from '../../content/logo/logo.svg';
 const HomePage = () => {
   const [data, setData] = useState(null);
   const [hasResponse, setDataResponse] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [filters, setFilters] = useState({ city: '', maxPrice: '', houseType: '' });
+  const shouldDisplayFilteredData = Object.values(filters).some(Boolean);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,11 +30,30 @@ const HomePage = () => {
     if (!hasResponse) {
       fetchData();
     }
-
   }, [hasResponse, data]);
 
-  if (data !== null && data !== undefined) {
+  useEffect(() => {
+    const filterData = () => {
+      if (data) {
+        const filteredResult = data.filter((item) => (
+          item.city.toLowerCase().includes(filters.city.toLowerCase().trim()) &&
+          item.price <= parseFloat(filters.maxPrice || Infinity) &&
+          (!filters.houseType || (item.houseType && item.houseType.toLowerCase().includes(filters.houseType.toLowerCase().trim())))
+        ));
+  
+        setFilteredData(filteredResult);
+      }
+    };
+  
+    filterData();
+  }, [filters, data]);
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+  };
+
+  if (data !== null && data !== undefined) {
     return (
       <div>
         <div className={styles.header}>
@@ -91,8 +113,68 @@ const HomePage = () => {
         <div className={styles.gen_object}>
           Все объекты
         </div>
+        <div className={styles.filters}>
+          <label>Город: 
+            <select type="text" name="city" value={filters.city} onChange={handleFilterChange} > 
+              <option value="">Выберите из списка</option>
+              <option value="Бар">Бар</option>
+              <option value="Будва">Будва</option>
+              <option value="Херцег-Нови">Херцег-Нови</option>
+              <option value="Котор">Котор</option>
+              <option value="Никшич">Никшич</option>
+              <option value="Петровац">Петровац</option>
+              <option value="Подгорица">Подгорица</option>
+              <option value="Прчань">Прчань</option>
+              <option value="Рисан">Рисан</option>
+              <option value="Сутоморе">Сутоморе</option>
+              <option value="Свети-Стефан">Свети-Стефан</option>
+              <option value="Тиват">Тиват</option>
+              <option value="Улцинь">Улцинь</option>
+              <option value="Жабляк">Жабляк</option>
+              <option value="Колашин">Колашин</option>
+              <option value="Баосичи">Баосичи</option>
+              <option value="Донья-Костаница">Донья-Костаница</option>
+              <option value="Доньи-Стой">Доньи-Стой</option>
+              <option value="Игало">Игало</option>
+              <option value="Плав">Плав</option>
+              <option value="Радановичи">Радановичи</option>
+              <option value="Свети Никола">Свети Никола</option>
+              <option value="Андриевица">Андриевица</option>
+              <option value="Бериславци">Бериславци</option>
+              <option value="Бигово">Бигово</option>
+              <option value="Биела">Биела</option>
+              <option value="Биело-Поле">Биело-Поле</option>
+              <option value="Даниловград">Даниловград</option>
+              <option value="Добра-Вода">Добра-Вода</option>
+              <option value="Каменари">Каменари</option>
+              <option value="Мойковац">Мойковац</option>
+              <option value="Пераст">Пераст</option>
+              <option value="Утьеха">Утьеха</option>
+              <option value="Цетине">Цетине</option>
+              <option value="Чань">Чань</option>
+            </select>
+          </label>
+          <label>
+            Максимальная цена до:
+            <select name="maxPrice" value={filters.maxPrice} onChange={handleFilterChange}>
+              <option value="">Не выбрано</option>
+              <option value="50000">50,000</option>
+              <option value="100000">100,000</option>
+            </select>
+          </label>        
+          <label>Тип дома: 
+            <select type="text" name="houseType" value={filters.houseType} onChange={handleFilterChange}>
+              <option value="">Выберите из списка</option>
+              <option value="Студии">Студии</option>
+              <option value="Квартиры">Квартиры</option>
+              <option value="Дома">Дома</option>
+              <option value="Виллы">Виллы</option>
+              <option value="Участки">Участки</option>
+            </select>
+          </label>
+        </div>
         <div className={styles.card_build}>
-          {data.map(item => (
+          {(shouldDisplayFilteredData ? filteredData : data).map(item => (
               <div key={item.id} className={styles.card}>
                 <div className={styles.imageList}>
                     {item.imageList.map((image, index) => (

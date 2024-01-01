@@ -266,4 +266,54 @@ a {
 .footer a:hover {
     background-color: #e5b900; /* измененный цвет фона при наведении */
 }
-    
+
+
+.filtersWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Обертка для фильтров */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: -5px; /* Уменьшает внешние отступы */
+  }
+  
+  /* Стили для каждого отдельного фильтра */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin: 5px; /* Уменьшает внутренние отступы */
+  }
+  
+  select {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  /* Стили для кнопки */
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
