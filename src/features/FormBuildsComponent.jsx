@@ -18,6 +18,7 @@ const FormBuildsComponent = () => {
     
     const [Builds, setBuilds] = useState({
         houseType : "",
+        typeDeal : "",
         title : "",
         description : "",
         price : "",
@@ -55,6 +56,7 @@ const FormBuildsComponent = () => {
                     const buildData = buildResponse.data;
                     setBuilds({
                         houseType : buildData.data.houseType || "",
+                        typeDeal : buildData.data.typeDeal || "",
                         title : buildData.data.title || "",
                         description : buildData.data.description || "",
                         price : buildData.data.price || "",
@@ -131,6 +133,7 @@ const FormBuildsComponent = () => {
       
         const formData = new FormData();
         formData.append("houseType", Builds.houseType);
+        formData.append("typeDeal", Builds.typeDeal);
         formData.append("title", Builds.title);
         formData.append("description", Builds.description);
         formData.append("price", Builds.price);
@@ -155,6 +158,7 @@ const FormBuildsComponent = () => {
             setMsg("Build Added Successfully");
             setBuilds({
               houseType: "",
+              typeDeal : "",
               title: "",
               description: "",
               price: "",
@@ -188,7 +192,7 @@ const FormBuildsComponent = () => {
                         Тип постройки
                         <br/>
                         <select name="houseType" value={Builds.houseType} onChange={handleChange} className={styles.form_select}>
-                            <option value="unknown">Выберите из списка</option>
+                            <option value="">Выберите из списка</option>
                             <option value="Студии">Студии</option>
                             <option value="Квартиры">Квартиры</option>
                             <option value="Дома">Дома</option>
@@ -197,6 +201,16 @@ const FormBuildsComponent = () => {
                         </select>
                     </label>
                     <br/>
+                    <label className={styles.form_label}>
+                        Тип сделки
+                        <br />
+                        <select name="typeDeal" value={Builds.typeDeal} onChange={handleChange} className={styles.form_select}>
+                        <option value="">Выберите из списка</option>
+                            <option value="Аренда">Аренда</option>
+                            <option value="Покупка">Покупка</option>
+                        </select>
+                    </label>
+                    <br />
                     <label className={styles.form_label}>Название</label>
                     <input type = "text" name="title" value={Builds.title} onChange={handleChange} className={styles.form_input}/>
                     <br/>

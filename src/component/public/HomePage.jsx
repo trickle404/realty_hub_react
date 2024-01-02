@@ -3,10 +3,8 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import Image from '../Image';
 import styles from '../../styles/HomePageComponent.module.css'
-import logo17 from '../../content/logo/17.png';
-import logo18 from '../../content/logo/18.png';
-import logo19 from '../../content/logo/19.png';
-import logo_realty_hub from '../../content/logo/logo.svg';
+import HeaderHome from '../static/HeaderHome';
+
 
 const HomePage = () => {
   const [data, setData] = useState(null);
@@ -38,7 +36,8 @@ const HomePage = () => {
         const filteredResult = data.filter((item) => (
           item.city.toLowerCase().includes(filters.city.toLowerCase().trim()) &&
           item.price <= parseFloat(filters.maxPrice || Infinity) &&
-          (!filters.houseType || (item.houseType && item.houseType.toLowerCase().includes(filters.houseType.toLowerCase().trim())))
+          (!filters.houseType || (item.houseType && item.houseType.toLowerCase().includes(filters.houseType.toLowerCase().trim()))) &&
+          (!filters.typeDeal || (item.typeDeal && item.typeDeal.toLowerCase().includes(filters.typeDeal.toLowerCase().trim())))
         ));
   
         setFilteredData(filteredResult);
@@ -56,120 +55,71 @@ const HomePage = () => {
   if (data !== null && data !== undefined) {
     return (
       <div>
-        <div className={styles.header}>
-          <div className={styles.links}>
-            <a className = {`${styles.a} ${styles.a_header}`} href="/login">Авторизация</a>
-          </div>
-          <div className={styles.logo_header}>
-            <img src={logo_realty_hub} alt="" />
-          </div>
-          <div className={styles.calls}>Закзать звонок</div>
-        </div>
-        <div className={styles.lang}>
-
-        </div>
-        <div className={styles.general_card_info}>
-          <div className={styles.general_t_container}>
-            <div className={`${styles.t_cover_wrapper} ${styles.t_valign_middle}`}>
-              <div className={styles.t1065__wrapper}>
-                <div className={`${styles.t1065__title} ${styles.t_title} ${styles.t_title_md }`}>
-                  Ваш гид в мире недвижимости Черногории!
-                </div>
-                <div className={`${styles.t1065__descr} ${styles.t_descr} ${styles.t_descr_xl}`}>
-                  Когда перемены точно к лучшему!
-                </div>
-                <div className={styles.t1065__itemwrapper}>
-                  <div className={styles.t1065__row}>
-                    <div className={`${styles.t1065__item} ${styles.t1065__item_flex}`}>
-                      <div className={styles.t1065__imgwrapper}>
-                        <img src={logo17} alt="" className={styles.t1065__img}/>
-                      </div>
-                      <div className={`${styles.t1065__item_text} ${styles.t_descr} ${styles.t_descr_md}`}>
-                        <strong>Более 200 прямых объектов</strong>
-                      </div>
-                    </div>
-                    <div className={`${styles.t1065__item} ${styles.t1065__item_flex}`}>
-                      <div className={styles.t1065__imgwrapper}>
-                        <img src={logo18} alt="" className={styles.t1065__img}/>
-                      </div>
-                      <div className={`${styles.t1065__item_text} ${styles.t_descr} ${styles.t_descr_md}`}>
-                        <strong>Тщательная проверка</strong>
-                      </div>
-                    </div>
-                    <div className={`${styles.t1065__item} ${styles.t1065__item_flex}`}>
-                      <div className={styles.t1065__imgwrapper}>
-                        <img src={logo19} alt="" className={styles.t1065__img}/>
-                      </div>
-                      <div className={`${styles.t1065__item_text} ${styles.t_descr} ${styles.t_descr_md}`}>
-                        <strong>С вами рядом до новоселья!</strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.gen_object}>
-          Все объекты
-        </div>
+        <HeaderHome/>
         <div className={styles.filters}>
-          <label>Город: 
+          <label>City: 
             <select type="text" name="city" value={filters.city} onChange={handleFilterChange} > 
-              <option value="">Выберите из списка</option>
-              <option value="Бар">Бар</option>
-              <option value="Будва">Будва</option>
-              <option value="Херцег-Нови">Херцег-Нови</option>
-              <option value="Котор">Котор</option>
-              <option value="Никшич">Никшич</option>
-              <option value="Петровац">Петровац</option>
-              <option value="Подгорица">Подгорица</option>
-              <option value="Прчань">Прчань</option>
-              <option value="Рисан">Рисан</option>
-              <option value="Сутоморе">Сутоморе</option>
-              <option value="Свети-Стефан">Свети-Стефан</option>
-              <option value="Тиват">Тиват</option>
-              <option value="Улцинь">Улцинь</option>
-              <option value="Жабляк">Жабляк</option>
-              <option value="Колашин">Колашин</option>
-              <option value="Баосичи">Баосичи</option>
-              <option value="Донья-Костаница">Донья-Костаница</option>
-              <option value="Доньи-Стой">Доньи-Стой</option>
-              <option value="Игало">Игало</option>
-              <option value="Плав">Плав</option>
-              <option value="Радановичи">Радановичи</option>
-              <option value="Свети Никола">Свети Никола</option>
-              <option value="Андриевица">Андриевица</option>
-              <option value="Бериславци">Бериславци</option>
-              <option value="Бигово">Бигово</option>
-              <option value="Биела">Биела</option>
-              <option value="Биело-Поле">Биело-Поле</option>
-              <option value="Даниловград">Даниловград</option>
-              <option value="Добра-Вода">Добра-Вода</option>
-              <option value="Каменари">Каменари</option>
-              <option value="Мойковац">Мойковац</option>
-              <option value="Пераст">Пераст</option>
-              <option value="Утьеха">Утьеха</option>
-              <option value="Цетине">Цетине</option>
-              <option value="Чань">Чань</option>
+              <option value="">Select from the list</option>
+              <option value="Бар">Bar</option>
+              <option value="Будва">Budva</option>
+              <option value="Херцег-Нови">Herceg Novi</option>
+              <option value="Котор">Kotor</option>
+              <option value="Никшич">Niksic</option>
+              <option value="Петровац">Petrovac</option>
+              <option value="Подгорица">Podgorica</option>
+              <option value="Прчань">Prcanj</option>
+              <option value="Рисан">Risan</option>
+              <option value="Сутоморе">Sutomore</option>
+              <option value="Свети-Стефан">Sveti Stefan</option>
+              <option value="Тиват">Tivat</option>
+              <option value="Улцинь">Ulcinj</option>
+              <option value="Жабляк">Zabljak</option>
+              <option value="Колашин">Kolasin</option>
+              <option value="Баосичи">Baosichi</option>
+              <option value="Донья-Костаница">Donja Kostanjica</option>
+              <option value="Доньи-Стой">Donyi-Stoy</option>
+              <option value="Игало">Igalo</option>
+              <option value="Плав">Plav</option>
+              <option value="Радановичи">Radanovics</option>
+              <option value="Свети Никола">Sveti Nikola</option>
+              <option value="Андриевица">Andrijevitsa</option>
+              <option value="Бериславци">Berislavtsi</option>
+              <option value="Бигово">Bigovo</option>
+              <option value="Биела">Biela</option>
+              <option value="Биело-Поле">Bijelo Polje</option>
+              <option value="Даниловград">Danilovgrad</option>
+              <option value="Добра-Вода">Dobra-Voda</option>
+              <option value="Каменари">Kamenari</option>
+              <option value="Мойковац">Mojkovac</option>
+              <option value="Пераст">Perast</option>
+              <option value="Утьеха">Utjeha</option>
+              <option value="Цетине">Cetinje</option>
+              <option value="Чань">Chan</option>
             </select>
           </label>
           <label>
-            Максимальная цена до:
+            Max price:
             <select name="maxPrice" value={filters.maxPrice} onChange={handleFilterChange}>
-              <option value="">Не выбрано</option>
+              <option value="">Select from the list</option>
               <option value="50000">50,000</option>
               <option value="100000">100,000</option>
             </select>
           </label>        
-          <label>Тип дома: 
+          <label>Type of build: 
             <select type="text" name="houseType" value={filters.houseType} onChange={handleFilterChange}>
-              <option value="">Выберите из списка</option>
-              <option value="Студии">Студии</option>
-              <option value="Квартиры">Квартиры</option>
-              <option value="Дома">Дома</option>
-              <option value="Виллы">Виллы</option>
-              <option value="Участки">Участки</option>
+              <option value="">Select from the list</option>
+              <option value="Студии">Studio</option>
+              <option value="Квартиры">Apartment</option>
+              <option value="Дома">House</option>
+              <option value="Виллы">Villas</option>
+              <option value="Участки">Piece of land</option>
+            </select>
+          </label>
+          <label>Chapter: 
+            <select type="text" name="typeDeal" value={filters.typeDeal} onChange={handleFilterChange}>
+              <option value="">Select from the list</option>
+              <option value="Аренда">rent</option>
+              <option value="Продажа">sale</option>
             </select>
           </label>
         </div>
@@ -193,7 +143,7 @@ const HomePage = () => {
         </div>
         <br />
         <div className={styles.footer}>
-          <a href="https://www.linkedin.com/in/dmitrii-afanasev-574a511aa/">Разработал Дмитрий Афанасьев</a>
+          <a href="https://www.linkedin.com/in/dmitrii-afanasev-574a511aa/">Develop by Dmitrii Afanasev</a>
         </div>
       </div>
     );
