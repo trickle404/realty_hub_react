@@ -86,6 +86,7 @@ const FormCreateClient = () => {
                 manager : ""
             });
         }).catch((error) => {
+            Cookies.remove('token');
             console.error("Error : ", error);
         })
     };

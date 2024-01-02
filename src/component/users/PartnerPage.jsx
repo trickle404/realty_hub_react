@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../actions/action";
 import HeaderComponent from '../users/HeaderComponent';
@@ -12,6 +12,7 @@ import styles from '../../styles/PartnerPageComponent.module.css';
 
 const PartnerPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const userDataLocation = location.state || {};
     const dispatch = useDispatch();
     const userData = useSelector((state) => state.userData);
@@ -76,6 +77,7 @@ const PartnerPage = () => {
                     dispatch(setUserData(res.data));
                 }
             } catch (error) {
+                Cookies.remove('token');
                 setError(error.message || 'Что-то пошло не так');
             } finally {
                 setLoading(false);
@@ -113,7 +115,7 @@ const PartnerPage = () => {
         fetchBuildsByManager();
         fetchClientsByManager();
         fetchData();
-    }, [dispatch, userDataLocation.username]);
+    }, [dispatch, userDataLocation.username, navigate, error]);
     
 
     if (loading) {

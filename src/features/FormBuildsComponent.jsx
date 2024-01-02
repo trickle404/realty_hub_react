@@ -87,6 +87,7 @@ const FormBuildsComponent = () => {
     
                 setLoading(false);
             } catch (error) {
+                Cookies.remove('token');
                 setError(error.message || "Something went wrong?");
                 setLoading(false);
             }

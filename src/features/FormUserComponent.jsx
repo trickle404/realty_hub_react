@@ -51,6 +51,7 @@ const FormUserComponent = () => {
                 roles : ""
             });
         }).catch((error) => {
+            Cookies.remove('token');
             console.error("Error : ", msg);
         })
     };
