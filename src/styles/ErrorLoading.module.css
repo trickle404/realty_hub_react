@@ -1,0 +1,34 @@
+.loading {
+    color: black; /* Цвет для загрузки */
+    font-size: 18px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Занимает всю высоту экрана */
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #3498db; /* Цвет для загрузки */
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error {
+    color: #e74c3c; /* Цвет для ошибки */
+    font-size: 18px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f2dede; /* Цвет фона для ошибки */
+    border: 1px solid #e74c3c; /* Цвет рамки для ошибки */
+    border-radius: 5px;
+}

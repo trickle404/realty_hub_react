@@ -1,14 +1,15 @@
 import React from "react";
+import styles from '../styles/Image.module.css';
 
 const Image = ({ key, image }) => {
-  if (image !== null && image !== undefined && image.previewImage) {
+  if (image !== null && image !== undefined) {
     return (
-      <div style={{ width: "260px", height: "286px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div className={styles.image_container}>
         <img
           id={key}
           src={"data:image/png;base64," + image.bytes}
           alt={image.name}
-          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+          className={styles.image}
         />
       </div>
     );

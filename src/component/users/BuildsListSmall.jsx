@@ -14,6 +14,7 @@ const BuildsListSmall = ({buildsList}) => {
                                 <p>Вид : {build.view}</p>
                                 <p>Тип дома : {build.type}</p>
                                 <p>Состояние : {build.type_of_dev}</p>
+                                <p>Тип сделки : {build.typeDeal}</p>
                             </div>
                         )
                     )

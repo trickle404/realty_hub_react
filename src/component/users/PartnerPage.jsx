@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import ClientsList from "./ClientsList";
 import BuildsListSmall from './BuildsListSmall';
 import styles from '../../styles/PartnerPageComponent.module.css';
+import stylePreloader from '../../styles/ErrorLoading.module.css';
 
 
 const PartnerPage = () => {
@@ -119,11 +120,14 @@ const PartnerPage = () => {
     
 
     if (loading) {
-        return <div>Загрузка...</div>;
+        return <div className={stylePreloader.loading}>Загрузка...</div>;
     }
 
     if (error) {
-        return <div>Ошибка: {error}</div>;
+        return(<div>
+            <HeaderComponent/>
+            <div className={stylePreloader.error}>Ошибка: {error}. Ваша ссесия закончилась. Нажмите кнопку "выход"</div>;
+        </div>);
     }
 
     return(
@@ -137,6 +141,7 @@ const PartnerPage = () => {
                     <Link to = "/create_client" className={styles.partner_link}>Добавить клиента</Link>
                     <Link to = "/all_builds" className={styles.partner_link}>Просмотреть все объекты</Link>
                     <Link to = "/all_clients" className={styles.partner_link}>Наши клиенты</Link>
+                    <Link to = "/build_from_client" className={styles.partner_link}>Предложение от клиентов</Link>
                 </div>
                 <div className={styles.left_block}>
                     <p className={styles.hello_partner}>{userData.name}, Ваши клиенты RealtyHub.ME :</p>

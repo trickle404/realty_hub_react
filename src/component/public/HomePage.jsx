@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import Image from '../Image';
-import styles from '../../styles/HomePageComponent.module.css'
+import styles from '../../styles/HomePageComponent.module.css';
 import HeaderHome from '../static/HeaderHome';
+import stylePreloader from '../../styles/ErrorLoading.module.css';
+import AuthorsSignature from '../static/AuthorsSignature';
 
 
 const HomePage = () => {
@@ -19,7 +21,6 @@ const HomePage = () => {
         const response = await axios.get('http://localhost:8090/public/home');
         setData(response.data);
         setDataResponse(true);
-        console.log(response.data);
       } catch (error) {
         console.error("Error getting data:", error);
       }
@@ -136,23 +137,21 @@ const HomePage = () => {
                   <p>{item.price} EUR</p>
                 </div>
                 <div>
-                  <Link className={styles.linkDetails} to={`/details/${item.id}`}>Подробнее</Link>
+                  <Link className={styles.linkDetails} to={`/details/${item.id}`}>More details</Link>
                 </div>
               </div>
             ))}
         </div>
         <br />
-        <div className={styles.footer}>
-          <a href="https://www.linkedin.com/in/dmitrii-afanasev-574a511aa/">Develop by Dmitrii Afanasev</a>
-        </div>
+        <AuthorsSignature/>
       </div>
     );
   }
 
   return (
     <div className='general'>
-      <div>
-        <p>Loading...</p>
+      <div className={stylePreloader.loading}>
+        Loading...
       </div>
     </div>);
 };

@@ -8,6 +8,7 @@ import FormUserComponent from "./features/FormUserComponent";
 import FormCreateClient from "./features/FormCreateClient";
 import BuildsList from "./component/users/BuildsList";
 // import UserProvider from "./component/context-state/UserProvider";
+import LeafletMap from "./component/static/LeafletMap";
 import Cookies from "js-cookie";
 
 const ProtectedRoute = ({ element }) => {
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/create_client" element={<ProtectedRoute element={<FormCreateClient/> } /> } />
           <Route path="/all_builds" element={<ProtectedRoute element={<BuildsList/> } /> } />
           <Route path="/create_build/:id?" element={<ProtectedRoute element={<FormBuildsComponent/> } /> } />
+          <Route path="/test_map" element={<LeafletMap geo={"51.505, -0.09"}/>}/>
         </Routes>
       {/* </UserProvider> */}
     </BrowserRouter>
