@@ -1,0 +1,145 @@
+.up_container {
+    background-color: #efefef;
+  }
+  
+  .carouselContainer {
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .carousel {
+    overflow: hidden;
+    flex: 1;
+    margin: 0 10px; /* Добавляем отступы слева и справа */
+  }
+  
+  .image_list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    transition: transform 0.5s ease;
+  }
+  
+  .carousel_item {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  
+  .prevButton,
+  .nextButton {
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    outline: none;
+  }
+  
+  .prevButton {
+    margin-right: 10px;
+  }
+  
+  .nextButton {
+    margin-left: 10px;
+  }
+  
+  .price {
+    margin-top: 10px; /* Добавляем отступ сверху */
+    text-align: center;
+    color: rgb(255, 127, 0);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 40px; /* Увеличиваем размер шрифта */
+  }
+
+.price p {
+    padding-bottom: 20px;
+}
+
+
+.information_container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+    margin: 0 20px; 
+  }
+  
+  
+  .information_item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  /* Стили для текста сверху изображения */
+  .information_item span {
+    font-family: 'Georgia',serif;
+    color: #ff7f00;
+    margin-bottom: 5px;
+    
+  }
+  
+  /* Стили для изображения по середине */
+  .information_item img {
+    max-width: 90px; 
+    max-height: 90px; 
+  }
+  
+  /* Стили для текста снизу изображения */
+  .information_item p {
+    margin-top: 5px; 
+  }
+
+.h_location {
+  align-items: center;
+  text-align: center;
+}
+
+.description_build_conatiner {
+  text-align: center;
+}
+
+.form_for_call_container {
+  width: 100%;
+  height: 400px;
+  background-color: #ff7f00;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.form_for_call_container h1, p {
+  text-align: center;
+}
+
+.form_call {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px; /* Задаем максимальную ширину формы */
+  margin: 0 auto; /* Центрируем форму горизонтально */
+}
+
+.form_input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Линия подчеркивания */
+  border-radius: 5px;
+  box-sizing: border-box; /* Учитываем padding внутри ширины */
+}
+
+.form_submit_btn {
+  width: 50%;
+  margin: 0 auto; /* Центрирование кнопки по горизонтали */
+  background-color: black; /* Цвет кнопки */
+  color: #ffffff; /* Цвет текста на кнопке */
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form_submit_btn:hover {
+  background-color: gray; /* Измененный цвет при наведении */
+}

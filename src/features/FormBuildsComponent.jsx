@@ -208,7 +208,7 @@ const FormBuildsComponent = () => {
                         <select name="typeDeal" value={Builds.typeDeal} onChange={handleChange} className={styles.form_select}>
                         <option value="">Выберите из списка</option>
                             <option value="Аренда">Аренда</option>
-                            <option value="Покупка">Покупка</option>
+                            <option value="Продажа">Продажа</option>
                         </select>
                     </label>
                     <br />
