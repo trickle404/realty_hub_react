@@ -1,6 +1,8 @@
 import styles from '../../styles/ClientList.module.css';
+import { Link } from "react-router-dom";
 
 const BuildsListSmall = ({buildsList}) => {
+    console.log(buildsList);
     return (
         <div>
             <div className={styles.clients_container}>
@@ -15,6 +17,7 @@ const BuildsListSmall = ({buildsList}) => {
                                 <p>Тип дома : {build.type}</p>
                                 <p>Состояние : {build.type_of_dev}</p>
                                 <p>Тип сделки : {build.typeDeal}</p>
+                                <Link className={styles.linkDetails} to={`/details/${build.id}`}>Подробнее</Link>
                             </div>
                         )
                     )
