@@ -33,3 +33,10 @@
   .linkDetails:hover {
     background-color: #333;
   }
+
+.change_button_build {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

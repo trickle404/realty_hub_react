@@ -295,17 +295,7 @@ const FormBuildsComponent = () => {
                     </label>
                     <br/>
                     <label className={styles.form_label}>Геолокация</label>
-                    <input type = "text" name="geo" value={Builds.geo} onChange={handleChange} className={styles.form_input}/>
-                    <br/>
-                    <label className={styles.form_label}>Менеджер</label>
-                    <select name="manager" value={Builds.manager} onChange={handleChange} className={styles.form_select}>
-                    <option value="">Select from the list</option>
-                        {managers.map(manager => (
-                            <option key={manager.id} value={manager.id}>
-                                {manager.name}
-                            </option>
-                        ))}
-                     </select>
+                    <input type = "text" name="geo" value={Builds.geo} onChange={handleChange} placeholder="поставьте координаты : 42.435338, 19.260000" className={styles.form_input}/>
                     <br/>
                     <label className={styles.form_label}>Контакты</label>
                     <input type = "text" name="contact" value={Builds.contact} onChange={handleChange} className={styles.form_input}/>
