@@ -276,7 +276,15 @@ const FormBuildsComponent = () => {
                     <input type = "text" name="view" value={Builds.view} onChange={handleChange} className={styles.form_input}/>
                     <br/>
                     <label className={styles.form_label}>До пляжа</label>
-                    <input type = "number" name="distance_to_beach" value={Builds.distance_to_beach} onChange={handleChange} className={styles.form_input}/>
+                        <br />
+                        <select name="distance_to_beach" value={Builds.distance_to_beach} onChange={handleChange} className={styles.form_select} placeholder="10 минут">
+                        <option value="unknown">Выберите из списка</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        </select>
                     <br/>
                     <label className={styles.form_label}>Этаж</label>
                     <input type = "number" name="floor" value={Builds.floor} onChange={handleChange} className={styles.form_input}/>
@@ -295,20 +303,7 @@ const FormBuildsComponent = () => {
                     </label>
                     <br/>
                     <label className={styles.form_label}>Геолокация</label>
-                    <input type = "text" name="geo" value={Builds.geo} onChange={handleChange} className={styles.form_input}/>
-                    <br/>
-                    <label className={styles.form_label}>Менеджер</label>
-                    <select name="manager" value={Builds.manager} onChange={handleChange} className={styles.form_select}>
-                    <option value="">Select from the list</option>
-                        {managers.map(manager => (
-                            <option key={manager.id} value={manager.id}>
-                                {manager.name}
-                            </option>
-                        ))}
-                     </select>
-                    <br/>
-                    <label className={styles.form_label}>Контакты</label>
-                    <input type = "text" name="contact" value={Builds.contact} onChange={handleChange} className={styles.form_input}/>
+                    <input type = "text" name="geo" value={Builds.geo} onChange={handleChange} placeholder="поставьте координаты : 42.435338, 19.260000" className={styles.form_input}/>
                     <br/>
                     <label className={styles.form_label}>Photo</label>
                     <input className={styles.form_file_input} type = "file" name="image" onChange={handleImageChange} accept="image/*" multiple/>

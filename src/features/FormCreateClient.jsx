@@ -119,15 +119,6 @@ const FormCreateClient = () => {
                 <input type="text" name="income" value={Client.income} onChange={handleChange} />
                 <label>Описание</label>
                 <input type="text" name="description" value={Client.description} onChange={handleChange} />
-                <label>Менеджер</label>
-                <select name="manager" value={Client.manager} onChange={handleChange} className={styles.form_select}>
-                <option value="">Select from the list</option>
-                    {managers.map(manager => (
-                        <option key={manager.id} value={manager.id}>
-                            {manager.name}
-                        </option>
-                    ))}
-                </select>
                 <input type="submit" value="Create" />
                 </form>
             </div>

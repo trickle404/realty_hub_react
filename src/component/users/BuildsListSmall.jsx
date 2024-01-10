@@ -14,7 +14,7 @@ const BuildsListSmall = ({buildsList}) => {
                                 <p>Город : {build.city}</p>
                                 <p>Цена : {build.price}</p>
                                 <p>Вид : {build.view}</p>
-                                <p>Тип дома : {build.type}</p>
+                                <p>Тип дома : {build.houseType}</p>
                                 <p>Состояние : {build.type_of_dev}</p>
                                 <p>Тип сделки : {build.typeDeal}</p>
                                 <Link className={styles.linkDetails} to={`/details/${build.id}`}>Подробнее</Link>

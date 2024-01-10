@@ -117,6 +117,22 @@ const PartnerPage = () => {
         fetchClientsByManager();
         fetchData();
     }, [dispatch, userDataLocation.username, navigate, error]);
+
+    const handleDeleteClient = async (clientId) => {
+        try {
+            const token = Cookies.get('token');
+            await axios.get(API_URL + "/delete_client/" + clientId, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setClients((prevClients) =>
+            prevClients.filter((client) => client.id !== clientId)
+          );
+        } catch (error) {
+            console.error(error);
+        }
+    }
     
 
     if (loading) {
@@ -145,7 +161,7 @@ const PartnerPage = () => {
                 </div>
                 <div className={styles.left_block}>
                     <p className={styles.hello_partner}>{userData.name}, Ваши клиенты RealtyHub.ME :</p>
-                    <ClientsList clientList={clients}/>
+                    <ClientsList clientList={clients} onDeleteClient={handleDeleteClient}/>
                 </div>
                 <div className={styles.right_block}>
                     <p className={styles.hello_partner}>{userData.name}, Ваши объекты RealtyHub.ME :</p>
