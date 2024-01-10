@@ -26,6 +26,7 @@ import AuthorsSignature from '../static/AuthorsSignature';
                 try {
                     const response = await axios.get(`http://localhost:8090/public/details_lot/${id}`);
                     setHouseData(response.data);
+                    console.log(response.data);
                 } catch (error) {
                     console.error(error);
                 }
@@ -101,7 +102,7 @@ import AuthorsSignature from '../static/AuthorsSignature';
                         <div className={`${styles.information_item} ${styles.beach}`}>
                             <span>To the beach</span>
                             <img src={beach} alt="" />
-                            <p>{houseData.distance_to_beach} m</p>
+                            <p>{houseData.distance_to_beach} minutes</p>
                         </div>
                         <div className={`${styles.information_item} ${styles.state_build}`}>
                             <span>Floor</span>
