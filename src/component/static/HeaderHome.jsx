@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import Modal from '../static/Modal';
+import axios from 'axios';
 import styles from '../../styles/HomePageComponent.module.css';
 import logo17 from '../../content/logo/17.png';
 import logo18 from '../../content/logo/18.png';
@@ -5,6 +8,44 @@ import logo19 from '../../content/logo/19.png';
 import logo_realty_hub from '../../content/logo/logo.svg';
 
 const HeaderHome = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const [formDataClient, setFormDataClient] = useState({
+    first_name : "",
+    phone : "",
+    email : ""
+  });
+
+  const SentDataToBot = async (e) => {
+    e.preventDefault();
+
+    if(!formDataClient.first_name || !formDataClient.phone) {
+        alert("Please fill in all fields before submitting.");
+        return;
+    }
+
+    try {
+        const currentUrl = window.location.href;
+        await axios.post('http://127.0.0.1:5000/request_call', {...formDataClient, currentUrl});
+        alert("Done");
+        setFormDataClient({
+            first_name: "",
+            phone: "",
+            email: ""
+        });
+    } catch (error) {
+        console.error(error);
+        alert(error);
+    }
+}
+
+const handleInputChange = (e) => {
+  setFormDataClient({
+      ...formDataClient,
+      [e.target.name]: e.target.value,
+  });
+};
+
     return (
         <div>
         <div className={styles.header}>
@@ -14,7 +55,7 @@ const HeaderHome = () => {
           <div className={styles.logo_header}>
             <img src={logo_realty_hub} alt="" />
           </div>
-          <div className={styles.calls}>Request a call</div>
+          <div className={styles.calls} onClick={() => setShowForm(true)}>Request a call</div>
         </div>
         <div className={styles.lang}>
 
@@ -61,6 +102,18 @@ const HeaderHome = () => {
             </div>
           </div>
         </div>
+        <Modal show={showForm} onClose={() => setShowForm(false)}>
+          <div className={styles.form_for_call_container}>
+          <h1>Have questions about the object?</h1>
+          <p>Fill out the application and we will call you back</p>
+          <form onSubmit={(e) => SentDataToBot(e)} className={styles.form_call}>
+              <input type="text" name="first_name" placeholder="Name" value={formDataClient.first_name} onChange={handleInputChange} className={styles.form_input}/>
+              <input type="text" name="phone" placeholder="phone" value={formDataClient.phone} onChange={handleInputChange} className={styles.form_input}/>
+              <input type="text" name="email" placeholder='email' value={formDataClient.email} onChange={handleInputChange} className={styles.form_input}/>
+              <input type="submit" value="Send" className={styles.form_submit_btn}/>
+          </form>
+          </div> 
+        </Modal>
         <div className={styles.gen_object}>
           All house
         </div>
@@ -68,3 +121,4 @@ const HeaderHome = () => {
     )
 }
 export default HeaderHome;
+
