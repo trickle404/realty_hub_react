@@ -46,7 +46,6 @@ const FormBuildsComponent = () => {
             try {
                 const token = Cookies.get('token');
     
-                // Получить данные конкретного дома, если есть id
                 if (id) {
                     const buildResponse = await axios.get(`${API_URL}/get_build/${id}`, {
                         headers: {
@@ -54,26 +53,31 @@ const FormBuildsComponent = () => {
                         }
                     });
                     const buildData = buildResponse.data;
-                    setBuilds({
-                        houseType : buildData.data.houseType || "",
-                        typeDeal : buildData.data.typeDeal || "",
-                        title : buildData.data.title || "",
-                        description : buildData.data.description || "",
-                        price : buildData.data.price || "",
-                        square_footage : buildData.data.square_footage || "",
-                        count_of_bedrooms : buildData.data.count_of_bedrooms || "",
-                        count_of_bathrooms : buildData.data.count_of_bathrooms || "",
-                        city : buildData.data.city || "",
-                        view : buildData.data.view || "",
-                        distance_to_beach : buildData.data.distance_to_beach || "",
-                        floor : buildData.data.floor || "",
-                        number_of_stores : buildData.data.number_of_stores || "",
-                        type_of_dev : buildData.data.type_of_dev || "",
-                        geo : buildData.data.geo || "",
-                        manager : buildData.data.manager || "",
-                        contact : buildData.data.contact || "",
-                        image : buildData.data.image || []
-                    });
+                    console.log(buildData);
+                    if (buildData) {
+                        setBuilds({
+                            houseType: buildData.houseType || "",
+                            typeDeal: buildData.typeDeal || "",
+                            title: buildData.title || "",
+                            description: buildData.description || "",
+                            price: buildData.price || "",
+                            square_footage: buildData.square_footage || "",
+                            count_of_bedrooms: buildData.count_of_bedrooms || "",
+                            count_of_bathrooms: buildData.count_of_bathrooms || "",
+                            city: buildData.city || "",
+                            view: buildData.view || "",
+                            distance_to_beach: buildData.distance_to_beach || "",
+                            floor: buildData.floor || "",
+                            number_of_stores: buildData.number_of_stores || "",
+                            type_of_dev: buildData.type_of_dev || "",
+                            geo: buildData.geo || "",
+                            manager: buildData.manager || "",
+                            contact: buildData.contact || "",
+                            image: buildData.image || []
+                        });
+                    } else {
+                        console.error("buildData.data is undefined or null");
+                    }
                 }
     
                 // Получить список всех пользователей
@@ -87,18 +91,18 @@ const FormBuildsComponent = () => {
     
                 setLoading(false);
             } catch (error) {
-                Cookies.remove('token');
+                // Cookies.remove('token');
                 setError(error.message || "Something went wrong?");
                 setLoading(false);
             }
         };
     
         fetchData();
-    
     }, [id]);
 
     const handleChange = e => {
         const {name , value} = e.target;
+        console.log(`Changing ${name} to ${value}`);
         setBuilds({...Builds, [name]:value})
     }
 
@@ -133,7 +137,7 @@ const FormBuildsComponent = () => {
         e.preventDefault();
       
         const formData = new FormData();
-        formData.append("houseType", Builds.houseType);
+        // formData.append("houseType", Builds.houseType);
         formData.append("typeDeal", Builds.typeDeal);
         formData.append("title", Builds.title);
         formData.append("description", Builds.description);
