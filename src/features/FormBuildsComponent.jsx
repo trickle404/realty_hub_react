@@ -6,6 +6,8 @@ import Cookies from "js-cookie";
 import styles from '../styles/FormBuilds.module.css';
 import logo_realty_hub from '../content/logo/Frame.png';
 import HeaderComponent from '../component/users/HeaderComponent';
+import { useDropzone } from 'react-dropzone';
+import PhotoUploader from "./PhotoUploader";
 
 
 const FormBuildsComponent = () => {
@@ -52,8 +54,8 @@ const FormBuildsComponent = () => {
                             'Authorization': `Bearer ${token}`
                         }
                     });
+                    
                     const buildData = buildResponse.data;
-                    console.log(buildData);
                     if (buildData) {
                         setBuilds({
                             houseType: buildData.houseType || "",
@@ -73,14 +75,13 @@ const FormBuildsComponent = () => {
                             geo: buildData.geo || "",
                             manager: buildData.manager || "",
                             contact: buildData.contact || "",
-                            image: buildData.image || []
+                            image: buildData.imageList || []
                         });
                     } else {
                         console.error("buildData.data is undefined or null");
                     }
                 }
     
-                // Получить список всех пользователей
                 const usersResponse = await axios.get(`${API_URL}/get_all_users`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -91,7 +92,6 @@ const FormBuildsComponent = () => {
     
                 setLoading(false);
             } catch (error) {
-                // Cookies.remove('token');
                 setError(error.message || "Something went wrong?");
                 setLoading(false);
             }
@@ -102,90 +102,111 @@ const FormBuildsComponent = () => {
 
     const handleChange = e => {
         const {name , value} = e.target;
-        console.log(`Changing ${name} to ${value}`);
         setBuilds({...Builds, [name]:value})
     }
 
-    const handleImageChange = (e) => {
-        const image = e.target.files;
-        setBuilds({ ...Builds, image: [...Builds.image, ...image] });
+    const handleImageChange = (newImageList) => {
+        // Проверяем, действительно ли есть изменения
+        if (JSON.stringify(newImageList) !== JSON.stringify(Builds.image)) {
+          setBuilds((prevBuilds) => ({ ...prevBuilds, image: newImageList }));
+        }
     };
 
-    const save  = async (builds) => {
-        const token = Cookies.get('token');
-        if(id) {
-            return axios.put(API_URL + "/edit_build/" + id, builds, {
-                headers : {
-                    'Authorization': `Bearer ${token}` 
-                }
-            });
-        } else {
+    const onFilesChange = (newImageList) => {
+        setBuilds((prevBuilds) => ({ ...prevBuilds, image: newImageList }));
+    };
 
-            if (Builds.image.length === 0) {
-                const defaultImageBlob = await fetch(logo_realty_hub).then(r => r.blob());
-                builds.append('image', defaultImageBlob);
-            }
-            return axios.post(API_URL + "/create_builds", builds, {
-                headers : {
-                    'Authorization': `Bearer ${token}` 
-                }
-            });
-        }
-    }
 
-    const CreateBuilds = (e) => {
-        e.preventDefault();
-      
-        const formData = new FormData();
-        // formData.append("houseType", Builds.houseType);
-        formData.append("typeDeal", Builds.typeDeal);
-        formData.append("title", Builds.title);
-        formData.append("description", Builds.description);
-        formData.append("price", Builds.price);
-        formData.append("square_footage", Builds.square_footage);
-        formData.append("count_of_bedrooms", Builds.count_of_bedrooms);
-        formData.append("count_of_bathrooms", Builds.count_of_bathrooms);
-        formData.append("city", Builds.city);
-        formData.append("view", Builds.view);
-        formData.append("distance_to_beach", Builds.distance_to_beach);
-        formData.append("floor", Builds.floor);
-        formData.append("number_of_stores", Builds.number_of_stores);
-        formData.append("type_of_dev", Builds.type_of_dev);
-        formData.append("geo", Builds.geo);
-        formData.append("manager", Builds.manager);
-        formData.append("contact", Builds.contact);
-        Builds.image.forEach((image, index) => {
-            formData.append(`image`, image);
+    const handleRemoveImage = (index) => {
+        setBuilds((prevBuilds) => {
+            const updatedImageArray = [...prevBuilds.image];
+            updatedImageArray.splice(index, 1);
+            return { ...prevBuilds, image: updatedImageArray };
         });
-      
-        save(formData)
-          .then((res) => {
+    };
+
+    const CreateBuilds = async (e) => {
+        e.preventDefault();
+    
+        try {
+            const token = Cookies.get('token');
+            const formData = new FormData();
+            formData.append("houseType", Builds.houseType);
+            formData.append("typeDeal", Builds.typeDeal);
+            formData.append("title", Builds.title);
+            formData.append("description", Builds.description);
+            formData.append("price", Builds.price);
+            formData.append("square_footage", Builds.square_footage);
+            formData.append("count_of_bedrooms", Builds.count_of_bedrooms);
+            formData.append("count_of_bathrooms", Builds.count_of_bathrooms);
+            formData.append("city", Builds.city);
+            formData.append("view", Builds.view);
+            formData.append("distance_to_beach", Builds.distance_to_beach);
+            formData.append("floor", Builds.floor);
+            formData.append("number_of_stores", Builds.number_of_stores);
+            formData.append("type_of_dev", Builds.type_of_dev);
+            formData.append("geo", Builds.geo);
+            formData.append("manager", Builds.manager);
+            formData.append("contact", Builds.contact);
+        
+            if (Builds.image.length > 0) {
+                Builds.image.forEach((image, index) => {
+                    if (image.bytes) {
+                        // Если это изображение из респонса, добавляем его в форму
+                        const byteArray = Uint8Array.from(atob(image.bytes), c => c.charCodeAt(0));
+                        const blob = new Blob([byteArray], { type: 'image/png' });
+                        formData.append(`image`, blob, `image_${index}.png`);
+                    } else if (image instanceof File) {
+                        // Если это файл, добавляем его в форму
+                        formData.append(`image`, image);
+                    }
+                });
+            }
+    
+            if (id) {
+                await axios.put(`${API_URL}/edit_build/${id}`, formData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            } else {
+                await axios.post(API_URL + "/create_builds", formData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            }
             setMsg("Build Added Successfully");
             setBuilds({
-              houseType: "",
-              typeDeal : "",
-              title: "",
-              description: "",
-              price: "",
-              square_footage: "",
-              count_of_bedrooms: "",
-              count_of_bathrooms: "",
-              city: "",
-              view: "",
-              distance_to_beach: "",
-              floor: "",
-              number_of_stores: "",
-              type_of_dev: "",
-              geo: "",
-              manager: "",
-              contact: "",
-              image: [],
+                houseType: "",
+                typeDeal: "",
+                title: "",
+                description: "",
+                price: "",
+                square_footage: "",
+                count_of_bedrooms: "",
+                count_of_bathrooms: "",
+                city: "",
+                view: "",
+                distance_to_beach: "",
+                floor: "",
+                number_of_stores: "",
+                type_of_dev: "",
+                geo: "",
+                manager: "",
+                contact: "",
+                image: [],
             });
-          })
-          .catch((error) => {
-            console.error("Error:", msg);
-          });
-      };
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop: handleImageChange,
+        accept: "image/*",
+        multiple: true
+    });
 
     return(
         <div>
@@ -309,8 +330,16 @@ const FormBuildsComponent = () => {
                     <label className={styles.form_label}>Геолокация</label>
                     <input type = "text" name="geo" value={Builds.geo} onChange={handleChange} placeholder="поставьте координаты : 42.435338, 19.260000" className={styles.form_input}/>
                     <br/>
-                    <label className={styles.form_label}>Photo</label>
-                    <input className={styles.form_file_input} type = "file" name="image" onChange={handleImageChange} accept="image/*" multiple/>
+                    <label className={styles.form_label}>Фотографии</label>
+                    <PhotoUploader onFilesUpload={handleImageChange} imageList={Builds.image} onFilesChange={onFilesChange} />
+                    <div className={styles.image_preview_container}>
+                        {Builds.image.map((img, index) => (
+                            <div key={index} className={styles.image_preview}>
+                                <img src={img.bytes ? `data:image/png;base64,${img.bytes}` : URL.createObjectURL(new Blob([img], { type: 'image/jpeg' }))} alt={`Preview ${index}`} />
+                                <button type="button" onClick={() => handleRemoveImage(index)}>Удалить</button>
+                            </div>
+                        ))}
+                    </div>
                     <br/>
                     <input type = "submit" value="Save" className={styles.form_submit_btn}/>
                 </form>

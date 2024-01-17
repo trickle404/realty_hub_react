@@ -1,5 +1,3 @@
-/* FormBuildsComponent.module.css */
-
 .container {
     display: flex;
     justify-content: center;
@@ -44,7 +42,7 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-    display: inline-block; /* Добавляем для того, чтобы кнопка была в одной строке с другими элементами */
+    display: inline-block; 
   }
   
   .form_submit_btn:hover {
@@ -70,8 +68,8 @@
     background: #2B2B2B; 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
-    justify-content: space-between; /* Распределение элементов по всей ширине контейнера */
-    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    justify-content: space-between; 
+    align-items: center; 
     padding: 10px; 
 }
 
@@ -81,4 +79,25 @@
     justify-content: center;
   }
   
+  .image_preview_container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image_preview {
+    margin-right: 10px; 
+    margin-bottom: 10px; 
+  }
+  
+  .image_preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+  }
+  
+  .image_preview button {
+    display: block;
+    margin-top: 5px; 
+  }
   
