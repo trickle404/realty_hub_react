@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, Navigate } from "react-router-dom";
@@ -70,9 +71,13 @@ const BuildsList = () => {
                   manager : {item.manager}
                 </Link>
                 <div>
-                    {item.imageList.map((image, index) => (
-                      <Image key={index} image={image}/>
-                    ))} 
+                    {item.imageList.map((image, index) => {
+                      if(image.previewImage) {
+                        return(
+                          <Image key={index} image={image}/>
+                        )
+                      }
+                    })} 
                 </div>
                 <br />
                 <div className={styles.change_button_build}>
