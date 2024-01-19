@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -61,41 +62,41 @@ const HomePage = () => {
           <label>City: 
             <select type="text" name="city" value={filters.city} onChange={handleFilterChange} > 
               <option value="">Select from the list</option>
-              <option value="Бар">Bar</option>
-              <option value="Будва">Budva</option>
-              <option value="Херцег-Нови">Herceg Novi</option>
-              <option value="Котор">Kotor</option>
-              <option value="Никшич">Niksic</option>
-              <option value="Петровац">Petrovac</option>
-              <option value="Подгорица">Podgorica</option>
-              <option value="Прчань">Prcanj</option>
-              <option value="Рисан">Risan</option>
-              <option value="Сутоморе">Sutomore</option>
-              <option value="Свети-Стефан">Sveti Stefan</option>
-              <option value="Тиват">Tivat</option>
-              <option value="Улцинь">Ulcinj</option>
-              <option value="Жабляк">Zabljak</option>
-              <option value="Колашин">Kolasin</option>
-              <option value="Баосичи">Baosichi</option>
-              <option value="Донья-Костаница">Donja Kostanjica</option>
-              <option value="Доньи-Стой">Donyi-Stoy</option>
-              <option value="Игало">Igalo</option>
-              <option value="Плав">Plav</option>
-              <option value="Радановичи">Radanovics</option>
-              <option value="Свети Никола">Sveti Nikola</option>
-              <option value="Андриевица">Andrijevitsa</option>
-              <option value="Бериславци">Berislavtsi</option>
-              <option value="Бигово">Bigovo</option>
-              <option value="Биела">Biela</option>
-              <option value="Биело-Поле">Bijelo Polje</option>
-              <option value="Даниловград">Danilovgrad</option>
-              <option value="Добра-Вода">Dobra-Voda</option>
-              <option value="Каменари">Kamenari</option>
-              <option value="Мойковац">Mojkovac</option>
-              <option value="Пераст">Perast</option>
-              <option value="Утьеха">Utjeha</option>
-              <option value="Цетине">Cetinje</option>
-              <option value="Чань">Chan</option>
+              <option value="Bar">Bar</option>
+              <option value="Budva">Budva</option>
+              <option value="Herceg Novi">Herceg Novi</option>
+              <option value="Kotor">Kotor</option>
+              <option value="Niksic">Niksic</option>
+              <option value="Petrovac">Petrovac</option>
+              <option value="Podgorica">Podgorica</option>
+              <option value="Prcanj">Prcanj</option>
+              <option value="Risan">Risan</option>
+              <option value="Sutomore">Sutomore</option>
+              <option value="Sveti Stefan">Sveti Stefan</option>
+              <option value="Tivat">Tivat</option>
+              <option value="Ulcinj">Ulcinj</option>
+              <option value="Zabljak">Zabljak</option>
+              <option value="Kolasin">Kolasin</option>
+              <option value="Baosichi">Baosichi</option>
+              <option value="Donja Kostanjica">Donja Kostanjica</option>
+              <option value="Donyi-Stoy">Donyi-Stoy</option>
+              <option value="Igalo">Igalo</option>
+              <option value="Plav">Plav</option>
+              <option value="Radanovics">Radanovics</option>
+              <option value="Sveti Nikola">Sveti Nikola</option>
+              <option value="Andrijevitsa">Andrijevitsa</option>
+              <option value="Berislavtsi">Berislavtsi</option>
+              <option value="Bigovo">Bigovo</option>
+              <option value="Biela">Biela</option>
+              <option value="Bijelo Polje">Bijelo Polje</option>
+              <option value="Danilovgrad">Danilovgrad</option>
+              <option value="Dobra-Voda">Dobra-Voda</option>
+              <option value="Kamenari">Kamenari</option>
+              <option value="Mojkovac">Mojkovac</option>
+              <option value="Perast">Perast</option>
+              <option value="Utjeha">Utjeha</option>
+              <option value="Cetinje">Cetinje</option>
+              <option value="Chan">Chan</option>
             </select>
           </label>
           <label>
@@ -128,9 +129,13 @@ const HomePage = () => {
           {(shouldDisplayFilteredData ? filteredData : data).map(item => (
               <div key={item.id} className={styles.card}>
                 <div className={styles.imageList}>
-                    {item.imageList.map((image, index) => (
-                      <Image key={index} image={image}/>
-                    ))} 
+                  {item.imageList.map((image, index) => {
+                      if(image.previewImage) {
+                        return(
+                          <Image key={index} image={image}/>
+                        )
+                      }
+                  })} 
                 </div>
                 <div className={styles.cardContent}>
                   <p>{item.title}</p>

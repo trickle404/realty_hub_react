@@ -115,7 +115,7 @@ const handleInputChange = (e) => {
           </div> 
         </Modal>
         <div className={styles.gen_object}>
-          All house
+          All builds
         </div>
         </div>
     )
