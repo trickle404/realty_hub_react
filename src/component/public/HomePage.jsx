@@ -19,7 +19,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://realty-hub-backend-b2a57ab30fb8.herokuapp.com/public/home');
+        const response = await axios.get('https://realty-hub-backend-b2a57ab30fb8.herokuapp.com/public/home');
         setData(response.data);
         setDataResponse(true);
       } catch (error) {
