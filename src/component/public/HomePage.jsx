@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Image from '../Image';
 import styles from '../../styles/HomePageComponent.module.css';
 import HeaderHome from '../static/HeaderHome';
-import stylePreloader from '../../styles/ErrorLoading.module.css';
+// import stylePreloader from '../../styles/ErrorLoading.module.css';
 import AuthorsSignature from '../static/AuthorsSignature';
 
 
@@ -152,13 +152,6 @@ const HomePage = () => {
       </div>
     );
   }
-
-  return (
-    <div className='general'>
-      <div className={stylePreloader.loading}>
-        Loading...
-      </div>
-    </div>);
 };
 
 export default HomePage;
