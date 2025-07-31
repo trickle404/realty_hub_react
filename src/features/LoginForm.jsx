@@ -46,6 +46,13 @@ const LoginComponent = () => {
     }
   };
 
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <div>
       <div className={style.header}>
