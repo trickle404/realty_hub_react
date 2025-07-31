@@ -11,13 +11,13 @@ const BuildsList = () => {
   const [data, setData] = useState(null);
   const [hasResponse, setDataResponse] = useState(false);
   const [editBuildId, setEditBuildId] = useState(null);
-  const API_URL = "https://localhost:8090/private";
+  const API_URL = "https://realtyhubengine-production.up.railway.app/private";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://realty-hub-backend-b2a57ab30fb8.herokuapp.com/public/home",
+          "https://realtyhubengine-production.up.railway.app/public/home",
         );
         setData(response.data);
         console.log(response.data);

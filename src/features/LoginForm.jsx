@@ -30,7 +30,7 @@ const LoginComponent = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://realty-hub-backend-b2a57ab30fb8.herokuapp.com/generate_token",
+        "http://realtyhubengine-production.up.railway.app/generate_token",
         formData,
         {
           headers: {

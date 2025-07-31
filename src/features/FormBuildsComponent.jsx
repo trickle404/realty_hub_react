@@ -14,8 +14,7 @@ const FormBuildsComponent = () => {
 
   const [msg, setMsg] = useState("");
 
-  const API_URL =
-    "https://realty-hub-backend-b2a57ab30fb8.herokuapp.com/private";
+  const API_URL = "http://realtyhubengine-production.up.railway.app/private";
 
   const [Builds, setBuilds] = useState({
     houseType: "",
@@ -35,6 +34,7 @@ const FormBuildsComponent = () => {
     geo: "",
     manager: "",
     contact: "",
+    hasLift: "",
     image: [],
   });
 
@@ -74,6 +74,7 @@ const FormBuildsComponent = () => {
               geo: buildData.geo || "",
               manager: buildData.manager || "",
               contact: buildData.contact || "",
+              hasLift: buildData.hasLift || "",
               image: buildData.imageList || [],
             });
           } else {
@@ -146,6 +147,7 @@ const FormBuildsComponent = () => {
       formData.append("geo", Builds.geo);
       formData.append("manager", Builds.manager);
       formData.append("contact", Builds.contact);
+      formData.append("hasLift", Builds.hasLift);
 
       if (Builds.image.length > 0) {
         Builds.image.forEach((image, index) => {
@@ -195,6 +197,7 @@ const FormBuildsComponent = () => {
         geo: "",
         manager: "",
         contact: "",
+        hasLift: "",
         image: [],
       });
     } catch (error) {
@@ -231,6 +234,7 @@ const FormBuildsComponent = () => {
               <option value="Дома">Дома</option>
               <option value="Виллы">Виллы</option>
               <option value="Участки">Участки</option>
+              <option value="Коммерчиская">Коммерчиская</option>
             </select>
           </label>
           <br />
@@ -351,14 +355,20 @@ const FormBuildsComponent = () => {
             </select>
           </label>
           <br />
-          <label className={styles.form_label}>Вид</label>
-          <input
-            type="text"
-            name="view"
-            value={Builds.view}
-            onChange={handleChange}
-            className={styles.form_input}
-          />
+          <label className={styles.form_label}>
+            Вид
+            <br />
+            <select
+              name="view"
+              value={Builds.view}
+              onChange={handleChange}
+              className={styles.form_select}
+            >
+              <option value="море">Sea</option>
+              <option value="горы">Mount</option>
+              <option value="город">City</option>
+            </select>
+          </label>
           <br />
           <label className={styles.form_label}>До пляжа</label>
           <br />
@@ -367,14 +377,20 @@ const FormBuildsComponent = () => {
             value={Builds.distance_to_beach}
             onChange={handleChange}
             className={styles.form_select}
-            placeholder="10 минут"
+            placeholder="100 метров"
           >
             <option value="unknown">Выберите из списка</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
+            <option value="100">100 m</option>
+            <option value="200">200 m</option>
+            <option value="300">300 m</option>
+            <option value="400">400 m</option>
+            <option value="500">500 m</option>
+            <option value="600">600 m</option>
+            <option value="700">700 m</option>
+            <option value="800">800 m</option>
+            <option value="900">900 m</option>
+            <option value="1000">1 km</option>
+            <option value="1001">1 km +</option>
           </select>
           <br />
           <label className={styles.form_label}>Этаж</label>
@@ -407,7 +423,21 @@ const FormBuildsComponent = () => {
               <option value="unknown">Выберите из списка</option>
               <option value="Новостройка">Новостройка</option>
               <option value="Вторичная">Вторичная</option>
-              <option value="Коммерчиская">Коммерчиская</option>
+            </select>
+          </label>
+          <br />
+          <label className={styles.form_label}>
+            Лифт
+            <br />
+            <select
+              name="hasLift"
+              value={Builds.hasLift}
+              onChange={handleChange}
+              className={styles.form_select}
+            >
+              <option value="false">Выберите из списка</option>
+              <option value="true">Есть лифт</option>
+              <option value="false">Нет лифта</option>
             </select>
           </label>
           <br />

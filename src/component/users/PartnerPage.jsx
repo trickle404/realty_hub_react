@@ -16,8 +16,7 @@ const PartnerPage = () => {
   const userDataLocation = location.state || {};
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
-  const API_URL =
-    "https://realty-hub-backend-b2a57ab30fb8.herokuapp.com/private";
+  const API_URL = "https://realtyhubengine-production.up.railway.app/private";
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [builds, setBuilds] = useState([]);

@@ -23,7 +23,7 @@ const HouseDetails = () => {
     const fetchHouseData = async () => {
       try {
         const response = await axios.get(
-          `https://realty-hub-backend-b2a57ab30fb8.herokuapp.com/public/details_lot/${id}`,
+          `http://realtyhubengine-production.up.railway.app/public/details_lot/${id}`,
         );
         setHouseData(response.data);
       } catch (error) {
