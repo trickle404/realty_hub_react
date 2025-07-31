@@ -14,7 +14,7 @@ const FormBuildsComponent = () => {
 
   const [msg, setMsg] = useState("");
 
-  const API_URL = "http://realtyhubengine-production.up.railway.app/private";
+  const API_URL = "https://realtyhubengine-production.up.railway.app/private";
 
   const [Builds, setBuilds] = useState({
     houseType: "",

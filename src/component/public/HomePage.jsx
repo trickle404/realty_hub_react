@@ -26,7 +26,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://realtyhubengine-production.up.railway.app/public/home",
+          "https://realtyhubengine-production.up.railway.app/public/home",
         );
         setData(response.data);
         setDataResponse(true);
