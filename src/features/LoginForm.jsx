@@ -30,7 +30,7 @@ const LoginComponent = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://realtyhubengine-production.up.railway.app/generate_token",
+        "https://realtyhubengine-production.up.railway.app/public/generate_token",
         formData,
         {
           headers: {
