@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import HeaderComponent from "../component/users/HeaderComponent";
 
 const FormUserComponent = () => {
-  const [setMsg] = useState("");
+  const [msg, setMsg] = useState("");
   const API_URL = "https://realtyhubengine-production.up.railway.app/private";
 
   const [User, setUser] = useState({
@@ -54,6 +54,9 @@ const FormUserComponent = () => {
       .catch((error) => {
         if (error.response && error.response.status === 401) {
           Cookies.remove("token");
+          setMsg("Unauthorized");
+        } else {
+          setMsg("Error");
         }
         console.error("Error : ", error);
       });
@@ -61,6 +64,7 @@ const FormUserComponent = () => {
 
   return (
     <div>
+      {msg && <p>{msg}</p>}
       <HeaderComponent />
       <div className={styles.add_user}>
         <div>
