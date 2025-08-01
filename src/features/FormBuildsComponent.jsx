@@ -52,7 +52,7 @@ const FormBuildsComponent = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, form]);
 
   const onFinish = async (values) => {
     try {
