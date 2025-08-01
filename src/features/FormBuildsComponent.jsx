@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-import styles from "../styles/FormBuilds.module.css";
 import HeaderComponent from "../component/users/HeaderComponent";
 import { Form, Input, InputNumber, Select, Button, message } from "antd";
 import PhotoUploader from "./PhotoUploader";
