@@ -84,6 +84,8 @@ const FormBuildsComponent = () => {
     } catch (err) {
       console.error(err);
       message.error("Ошибка при сохранении");
+      token = Cookies.get("token");
+      console.log(token);
     }
   };
 
