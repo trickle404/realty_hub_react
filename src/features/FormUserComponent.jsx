@@ -7,7 +7,7 @@ import HeaderComponent from "../component/users/HeaderComponent";
 
 const FormUserComponent = () => {
   const [setMsg] = useState("");
-  const API_URL = "http://realtyhubengine-production.up.railway.app/private";
+  const API_URL = "https://realtyhubengine-production.up.railway.app/private";
 
   const [User, setUser] = useState({
     name: "",

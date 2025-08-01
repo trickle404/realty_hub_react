@@ -8,7 +8,7 @@ import HeaderComponent from "../component/users/HeaderComponent";
 
 const FormCreateClient = () => {
   const [msg, setMsg] = useState("");
-  const API_URL = "http://realtyhubengine-production.up.railway.app/rivate";
+  const API_URL = "https://realtyhubengine-production.up.railway.app/rivate";
 
   const [Client, setClient] = useState({
     firstName: "",
