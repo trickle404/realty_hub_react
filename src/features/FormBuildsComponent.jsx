@@ -134,7 +134,7 @@ const FormBuildsComponent = () => {
   ];
 
   return (
-    <div className={styles.from_container}>
+    <div>
       <HeaderComponent />
       <Form
         form={form}
@@ -177,19 +177,19 @@ const FormBuildsComponent = () => {
         </Form.Item>
 
         <Form.Item name="price" label="Цена">
-          <InputNumber min={0} className={styles.full_width} />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="square_footage" label="Метраж">
-          <InputNumber min={0} className={styles.full_width} />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="count_of_bedrooms" label="Спален кол-во">
-          <InputNumber min={0} className={styles.full_width} />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="count_of_bathrooms" label="Санузлов кол-во">
-          <InputNumber min={0} className={styles.full_width} />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="city" label="Город">
@@ -221,11 +221,11 @@ const FormBuildsComponent = () => {
         </Form.Item>
 
         <Form.Item name="floor" label="Этаж">
-          <InputNumber min={0} className={styles.full_width} />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="number_of_stores" label="Этажность">
-          <InputNumber min={0} className={styles.full_width} />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="type_of_dev" label="Тип застройки">
@@ -255,11 +255,7 @@ const FormBuildsComponent = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className={styles.form_submit_btn}
-          >
+          <Button type="primary" htmlType="submit">
             Сохранить
           </Button>
         </Form.Item>
