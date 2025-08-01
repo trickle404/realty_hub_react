@@ -36,23 +36,26 @@ const FormBuildsComponent = () => {
   });
 
   useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) return; // Защита от undefined
+
     const fetchData = async () => {
       try {
-        const token = Cookies.get("token");
         if (id) {
           const res = await axios.get(`${API_URL}/get_build/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setBuilds(res.data);
-          form.setFieldsValue(res.data); // заполняем форму
+          form.setFieldsValue(res.data);
         }
       } catch (err) {
         message.error("Ошибка при загрузке данных");
       }
     };
-    fetchData();
-  }, [id, form]);
 
+    fetchData();
+  }, [id, form, Cookies.get("token")]);
   const onFinish = async (values) => {
     try {
       const token = Cookies.get("token");
