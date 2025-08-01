@@ -52,8 +52,10 @@ const FormUserComponent = () => {
         });
       })
       .catch((error) => {
-        Cookies.remove("token");
-        console.error("Error : ", msg);
+        if (error.response && error.response.status === 401) {
+          Cookies.remove("token");
+        }
+        console.error("Error : ", error);
       });
   };
 

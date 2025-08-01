@@ -84,7 +84,9 @@ const FormCreateClient = () => {
         });
       })
       .catch((error) => {
-        Cookies.remove("token");
+        if (error.response && error.response.status === 401) {
+          Cookies.remove("token");
+        }
         console.error("Error : ", error);
       });
   };
