@@ -12,7 +12,6 @@ import view from "../../content/logo/view.png";
 import beach from "../../content/logo/beach.png";
 import state_build from "../../content/logo/state_build.png";
 import LeafletMap from "../static/LeafletMap";
-import AuthorsSignature from "../static/AuthorsSignature";
 
 const HouseDetails = () => {
   const { id } = useParams();
@@ -200,7 +199,6 @@ const HouseDetails = () => {
             />
           </form>
         </div>
-        <AuthorsSignature />
       </div>
     );
   }

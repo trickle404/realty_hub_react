@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Image from "../Image";
 import styles from "../../styles/HomePageComponent.module.css";
 import HeaderHome from "../static/HeaderHome";
-import AuthorsSignature from "../static/AuthorsSignature";
 
 const HomePage = () => {
   const [data, setData] = useState(null);
@@ -264,7 +263,6 @@ const HomePage = () => {
           ))}
         </div>
         <br />
-        <AuthorsSignature />
       </div>
     );
   }
