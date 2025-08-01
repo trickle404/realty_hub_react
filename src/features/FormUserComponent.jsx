@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import HeaderComponent from "../component/users/HeaderComponent";
 
 const FormUserComponent = () => {
-  const [msg, setMsg] = useState("");
+  const [setMsg] = useState("");
   const API_URL = "http://realtyhubengine-production.up.railway.app/private";
 
   const [User, setUser] = useState({
