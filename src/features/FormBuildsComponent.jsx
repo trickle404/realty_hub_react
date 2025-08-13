@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import HeaderComponent from "../component/users/HeaderComponent";
 import { Form, Input, InputNumber, Select, Button, message } from "antd";
 import PhotoUploader from "./PhotoUploader";
+import styles from "../styles/FormBuildsComponent.module.css";
 
 const { Option } = Select;
 
@@ -35,6 +36,8 @@ const FormBuildsComponent = () => {
     image: [],
   });
 
+  const token = Cookies.get("token");
+
   useEffect(() => {
     const token = Cookies.get("token");
 
@@ -55,7 +58,7 @@ const FormBuildsComponent = () => {
     };
 
     fetchData();
-  }, [id, form, Cookies.get("token")]);
+  }, [id, form, token]);
   const onFinish = async (values) => {
     try {
       const token = Cookies.get("token");
@@ -139,13 +142,14 @@ const FormBuildsComponent = () => {
   ];
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <HeaderComponent />
       <Form
         form={form}
         layout="vertical"
         onFinish={onFinish}
         initialValues={Builds}
+        style={{ width: 400 }}
       >
         <Form.Item
           name="houseType"
