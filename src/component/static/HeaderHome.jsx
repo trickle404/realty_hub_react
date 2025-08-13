@@ -52,11 +52,11 @@ const HeaderHome = () => {
   return (
     <div>
       <div className={styles.header}>
-        <div className={styles.links}>
+        {/* <div className={styles.links}>
           <a className={`${styles.a} ${styles.a_header}`} href="/login">
             Sign in
           </a>
-        </div>
+        </div> */}
         <div className={styles.logo_header}>
           <img src={logo_realty_hub} alt="" />
         </div>

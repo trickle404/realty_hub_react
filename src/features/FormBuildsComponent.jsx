@@ -142,8 +142,9 @@ const FormBuildsComponent = () => {
   ];
 
   return (
-    <div className={styles.formContainer}>
+    <div>
       <HeaderComponent />
+      <div className={styles.formContainer}>
       <Form
         form={form}
         layout="vertical"
@@ -269,6 +270,7 @@ const FormBuildsComponent = () => {
           </Button>
         </Form.Item>
       </Form>
+    </div>
     </div>
   );
 };
