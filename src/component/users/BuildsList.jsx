@@ -36,17 +36,22 @@ const BuildsList = () => {
     setEditBuildId(buildId);
   };
 
-  const handleDeleteByIdClick = (buildId) => {
+  const handleDeleteByIdClick = async (buildId) => {
     try {
       const token = Cookies.get("token");
-      axios.get(API_URL + "/delete_build/" + buildId, {
+      const response = await axios.delete(API_URL + "/delete_build/" + buildId, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      window.location.reload();
+      
+      if (response.status === 200) {
+        // Обновляем данные без полной перезагрузки страницы
+        setData(data.filter(item => item.id !== buildId));
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Delete error:", error);
+      alert("Не удалось удалить объект");
     }
   };
 

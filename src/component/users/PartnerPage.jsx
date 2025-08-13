@@ -175,9 +175,6 @@ const PartnerPage = () => {
           <Link to="/all_clients" className={styles.partner_link}>
             Наши клиенты
           </Link>
-          <Link to="/build_from_client" className={styles.partner_link}>
-            Предложение от клиентов
-          </Link>
         </div>
         <div className={styles.left_block}>
           <p className={styles.hello_partner}>
